@@ -9,7 +9,7 @@ internal record Reservation(Car Car, DateTime Start, DateTime End, bool IsDeposi
     public Guid Id { get; } = Guid.NewGuid();
 
     // TODO: Implement this
-    public int GetPrice()
+    public int GetTotalPrice()
     {
         return 0;
     }
