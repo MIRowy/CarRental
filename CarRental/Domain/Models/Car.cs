@@ -2,11 +2,11 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
-namespace CarRental.Models;
+namespace CarRental.Domain.Models;
 
 public record Car(CarModel Model, string Description, int Odometer)
 {
-    public Guid Id { get; } = Guid.NewGuid();
+    public string Id { get; } = Guid.NewGuid().ToString();
 
     public IEnumerable<byte[]> Images { get; } = Enumerable.Empty<byte[]>();
 }

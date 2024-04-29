@@ -2,11 +2,13 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
-using CarRental.Enums;
+using CarRental.Domain.Enums;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace CarRental.Models;
+namespace CarRental.Domain.Models;
 
 public record CarModel(string Brand, string Variant, int Engine, int Power, string Colour, GearboxTypes Gearbox)
 {
-    public Guid Id { get; } = Guid.NewGuid();
+    [BsonId]
+    public string Id { get; } = Guid.NewGuid().ToString();
 }

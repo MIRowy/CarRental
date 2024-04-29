@@ -2,11 +2,14 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
-namespace CarRental.Models;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace CarRental.Domain.Models;
 
 internal record Reservation(Car Car, DateTime Start, DateTime End, bool IsDepositPaid)
 {
-    public Guid Id { get; } = Guid.NewGuid();
+    [BsonId]
+    public string Id { get; } = Guid.NewGuid().ToString();
 
     // TODO: Implement this
     public int GetTotalPrice()

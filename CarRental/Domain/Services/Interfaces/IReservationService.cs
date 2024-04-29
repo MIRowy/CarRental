@@ -2,7 +2,7 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
-namespace CarRental.Services.Interfaces;
+namespace CarRental.Domain.Services.Interfaces;
 
 /// <summary>
 /// The interface holding contracts for managing the reservation system.

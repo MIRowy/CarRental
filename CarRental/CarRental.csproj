@@ -12,12 +12,16 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="8.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0"/>
+        <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
         <PackageReference Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.1" />
     </ItemGroup>
 
 </Project>

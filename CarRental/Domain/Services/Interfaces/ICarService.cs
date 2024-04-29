@@ -2,9 +2,9 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
-using CarRental.Models;
+using CarRental.Domain.Models;
 
-namespace CarRental.Services.Interfaces;
+namespace CarRental.Domain.Services.Interfaces;
 
 /// <summary>
 /// The interface holding contracts for managing car domain.
@@ -12,7 +12,7 @@ namespace CarRental.Services.Interfaces;
 public interface ICarService
 {
     /// <summary>
-    /// Creates the car model out of the infrastructure data. 
+    /// Creates the car model out of the infrastructure data.
     /// </summary>
     /// <param name="car"></param>
     /// <returns>A <see cref="Car"/>.</returns>
@@ -26,7 +26,7 @@ public interface ICarService
     Task<Car> Get(Guid id);
 
     /// <summary>
-    /// Retrieves all of the cars from the persistence layer.
+    /// Retrieves all the cars from the persistence layer.
     /// </summary>
     /// <returns>A collection of <see cref="Car"/>.</returns>
     Task<IEnumerable<Car>> GetAll();

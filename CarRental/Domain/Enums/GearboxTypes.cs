@@ -2,7 +2,7 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
-namespace CarRental.Enums;
+namespace CarRental.Domain.Enums;
 
 public enum GearboxTypes
 {
