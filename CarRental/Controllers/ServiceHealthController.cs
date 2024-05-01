@@ -19,14 +19,14 @@ public class ServiceHealthController : ControllerBase
     }
 
     [HttpGet("/employee")]
-    [Authorize(Roles = nameof(ApplicationRoles.Employee))]
+    [Authorize(nameof(ApplicationRoles.Employee))]
     public IActionResult TestAuthorizeEmployee()
     {
         return this.Ok("Yes, you are a brave employee. Good day to you!");
     }
 
     [HttpGet("/signedUser")]
-    [Authorize(Roles = nameof(ApplicationRoles.User))]
+    [Authorize(nameof(ApplicationRoles.User))]
     public IActionResult TestAuthorizeSignedUser()
     {
         return this.Ok("Yes, you are a logged user. Congrats!");

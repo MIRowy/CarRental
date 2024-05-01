@@ -16,6 +16,7 @@ public record User(
     string Pesel)
 {
     [BsonId]
+    [BsonElement("_id")]
     public string Id { get; } = Guid.NewGuid().ToString();
 
     public ApplicationRoles Role { get; set; } = ApplicationRoles.User;

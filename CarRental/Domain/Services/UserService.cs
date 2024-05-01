@@ -32,6 +32,20 @@ public class UserService(
         return userRepository.Add(user);
     }
 
+    public async Task<User> Get(string emailAddress)
+    {
+        var user = await userRepository.Get(emailAddress);
+
+        if (user == null)
+        {
+            throw new UserNotFoundException();
+        }
+
+        return user;
+    }
+
+    public Task<List<User>> GetAll() => userRepository.GetAll();
+
     public async Task<JsonWebToken> GetJwt(string emailAddress, string password)
     {
         var user = await userRepository.Get(emailAddress);

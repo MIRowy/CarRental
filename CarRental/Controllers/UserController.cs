@@ -5,6 +5,8 @@
 using System.ComponentModel.DataAnnotations;
 using CarRental.Domain.Dto;
 using CarRental.Domain.Services.Interfaces;
+using CarRental.Infrastructure.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.Controllers;
@@ -19,6 +21,27 @@ public class UserController(IUserService userService) : ControllerBase
         await userService.Add(dto);
 
         return this.Created();
+    }
+
+    [HttpGet]
+    [Authorize(nameof(ApplicationRoles.User))]
+    public async Task<IActionResult> GetUser()
+    {
+        var emailAddress = this.HttpContext.User.FindFirst(a => a.Type == "email");
+
+        // Authorization framework ensures that email is always provided.
+        var user = await userService.Get(emailAddress!.Value);
+
+        return this.Ok(user);
+    }
+
+    [HttpGet("all")]
+    [Authorize(nameof(ApplicationRoles.Employee))]
+    public async Task<IActionResult> GetAllUsers()
+    {
+        var users = await userService.GetAll();
+
+        return this.Ok(users);
     }
 
     [HttpPost]

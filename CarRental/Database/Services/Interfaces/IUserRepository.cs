@@ -16,12 +16,33 @@ public interface IUserRepository
     /// </summary>
     /// <param name="user">The user.</param>
     /// <returns>An awaitable <see cref="Task"/>.</returns>
-    public Task Add(User user);
+    Task Add(User user);
 
     /// <summary>
     /// Gets user by the email address.
     /// </summary>
     /// <param name="emailAddress">The email address.</param>
     /// <returns>User if found, null otherwise.</returns>
-    public Task<User> Get(string emailAddress);
+    Task<User> Get(string emailAddress);
+
+    /// <summary>
+    /// Gets all users from the database.
+    /// </summary>
+    /// <returns>Collection of all users.</returns>
+    Task<List<User>> GetAll();
+
+    /// <summary>
+    /// Updates user by his email address.
+    /// </summary>
+    /// <param name="emailAddress">The email address.</param>
+    /// <param name="user">The user.</param>
+    /// <returns>Updated user.</returns>
+    Task<User> Update(string emailAddress, User user);
+
+    /// <summary>
+    /// Removes user from database by email address.
+    /// </summary>
+    /// <param name="emailAddress">The email address.</param>
+    /// <returns>An awaitable <see cref="Task"/>.</returns>
+    Task Delete(string emailAddress);
 }

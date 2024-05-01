@@ -3,6 +3,7 @@
 // </copyright>
 
 using CarRental.Domain.Dto;
+using CarRental.Domain.Models;
 using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace CarRental.Domain.Services.Interfaces;
@@ -17,7 +18,20 @@ public interface IUserService
     /// </summary>
     /// <param name="dto">The dto from the infrastructure layer.</param>
     /// <returns>An awaitable <see cref="Task"/>.</returns>
-    public Task Add(CreateUserDto dto);
+    Task Add(CreateUserDto dto);
+
+    /// <summary>
+    /// Gets user from the persistence layer by his email address.
+    /// </summary>
+    /// <param name="emailAddress">The email address.</param>
+    /// <returns>A <see cref="User"/>.</returns>
+    Task<User> Get(string emailAddress);
+
+    /// <summary>
+    /// Gets all users.
+    /// </summary>
+    /// <returns>Users collection.</returns>
+    Task<List<User>> GetAll();
 
     /// <summary>
     /// Creates new JWT for given user credentials.
@@ -25,5 +39,5 @@ public interface IUserService
     /// <param name="emailAddress">The email address.</param>
     /// <param name="password">The password.</param>
     /// <returns>JWT if user exists.</returns>
-    public Task<JsonWebToken> GetJwt(string emailAddress, string password);
+    Task<JsonWebToken> GetJwt(string emailAddress, string password);
 }

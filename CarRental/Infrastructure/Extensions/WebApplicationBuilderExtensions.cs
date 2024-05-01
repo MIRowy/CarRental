@@ -40,19 +40,20 @@ public static class WebApplicationBuilderExtensions
                 ValidateIssuer = false,
                 ValidateAudience = false,
             };
+            o.MapInboundClaims = false;
         });
 
-        builder.Services.AddAuthorization(options =>
-        {
-            options.AddPolicy(nameof(ApplicationRoles.User), policy =>
+        builder.Services
+            .AddAuthorizationBuilder()
+            .AddPolicy(nameof(ApplicationRoles.User), policy =>
             {
+                policy.RequireClaim("email");
                 policy.RequireClaim("role", nameof(ApplicationRoles.User), nameof(ApplicationRoles.Employee));
-            });
-
-            options.AddPolicy(nameof(ApplicationRoles.Employee), policy =>
+            })
+            .AddPolicy(nameof(ApplicationRoles.Employee), policy =>
             {
+                policy.RequireClaim("email");
                 policy.RequireClaim("role", nameof(ApplicationRoles.Employee));
             });
-        });
     }
 }
