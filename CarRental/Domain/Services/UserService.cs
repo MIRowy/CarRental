@@ -46,16 +46,16 @@ public class UserService(
 
     public Task<List<User>> GetAll() => userRepository.GetAll();
 
-    public async Task<JsonWebToken> GetJwt(string emailAddress, string password)
+    public async Task<JsonWebToken> GetJwt(GetJwtDto dto)
     {
-        var user = await userRepository.Get(emailAddress);
+        var user = await userRepository.Get(dto.EmailAddress);
 
         if (user == null)
         {
             throw new InvalidEmailAddressOrPasswordException();
         }
 
-        var isPasswordCorrect = passwordHasherService.VerifyPassword(user.Password, password);
+        var isPasswordCorrect = passwordHasherService.VerifyPassword(user.Password, dto.Password);
 
         if (!isPasswordCorrect)
         {

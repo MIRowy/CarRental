@@ -4,7 +4,6 @@
 
 using System.Security.Cryptography;
 using CarRental.Domain.Extensions;
-using CarRental.Domain.Models;
 using CarRental.Infrastructure.Extensions;
 using CarRental.Infrastructure.Middlewares;
 using CarRental.Infrastructure.Services;

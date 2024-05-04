@@ -8,27 +8,20 @@ using CarRental.Domain.Attributes;
 
 namespace CarRental.Domain.Dto;
 
-public class CreateUserDto
-{
+public record CreateUserDto(
     [Required]
     [EmailAddress]
-    public string EmailAddress { get; set; }
-
+    string EmailAddress,
     [Required]
     [PasswordPropertyText]
-    public string Password { get; set; }
-
+    string Password,
     [Required]
-    public string Name { get; set; }
-
+    string Name,
     [Required]
-    public string Surname { get; set; }
-
+    string Surname,
     [Required]
     [Phone]
-    public string PhoneNumber { get; set; }
-
+    string PhoneNumber,
     [Required]
     [Pesel]
-    public string Pesel { get; set; }
-}
+    string Pesel);

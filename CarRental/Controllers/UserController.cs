@@ -35,6 +35,15 @@ public class UserController(IUserService userService) : ControllerBase
         return this.Ok(user);
     }
 
+    [HttpGet("{emailAddress}")]
+    [Authorize(nameof(ApplicationRoles.Employee))]
+    public async Task<IActionResult> GetUser([FromRoute] string emailAddress)
+    {
+        var user = await userService.Get(emailAddress);
+
+        return this.Ok(user);
+    }
+
     [HttpGet("all")]
     [Authorize(nameof(ApplicationRoles.Employee))]
     public async Task<IActionResult> GetAllUsers()
@@ -46,9 +55,9 @@ public class UserController(IUserService userService) : ControllerBase
 
     [HttpPost]
     [Route("jwt")]
-    public async Task<IActionResult> GetJwt(string emailAddress, string password)
+    public async Task<IActionResult> GetJwt([Required, FromBody] GetJwtDto dto)
     {
-        var token = await userService.GetJwt(emailAddress, password);
+        var token = await userService.GetJwt(dto);
 
         return this.Ok(token.EncodedToken);
     }

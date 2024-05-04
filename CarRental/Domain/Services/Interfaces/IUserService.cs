@@ -36,8 +36,7 @@ public interface IUserService
     /// <summary>
     /// Creates new JWT for given user credentials.
     /// </summary>
-    /// <param name="emailAddress">The email address.</param>
-    /// <param name="password">The password.</param>
+    /// <param name="dto">The dto from the infrastructure layer.</param>
     /// <returns>JWT if user exists.</returns>
-    Task<JsonWebToken> GetJwt(string emailAddress, string password);
+    Task<JsonWebToken> GetJwt(GetJwtDto dto);
 }
