@@ -3,6 +3,7 @@
 // </copyright>
 
 using CarRental.Infrastructure.Enums;
+using CarRental.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +11,7 @@ namespace CarRental.Controllers;
 
 [ApiController]
 [Route("/api/v1/serviceHealth")]
-public class ServiceHealthController : ControllerBase
+public class ServiceHealthController(IAccountHelper accountHelper) : ControllerBase
 {
     [HttpGet]
     public IActionResult Get()
@@ -22,7 +23,7 @@ public class ServiceHealthController : ControllerBase
     [Authorize(nameof(ApplicationRoles.Employee))]
     public IActionResult TestAuthorizeEmployee()
     {
-        return this.Ok("Yes, you are a brave employee. Good day to you!");
+        return this.Ok($"Yes, you are a brave employee ({accountHelper.EmailAddress}). Good day to you!");
     }
 
     [HttpGet("/signedUser")]

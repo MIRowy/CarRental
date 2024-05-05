@@ -2,6 +2,7 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
+using CarRental.Domain.Dto;
 using CarRental.Domain.Models;
 
 namespace CarRental.Domain.Services.Interfaces;
@@ -14,34 +15,34 @@ public interface ICarService
     /// <summary>
     /// Creates the car model out of the infrastructure data.
     /// </summary>
-    /// <param name="car"></param>
+    /// <param name="dto">Object holding information about the new car.</param>
     /// <returns>A <see cref="Car"/>.</returns>
-    Task<Car> Create(Car car);
+    Task<Car> Add(AddCarDto dto);
 
     /// <summary>
     /// Retrieves a car from the persistence layer.
     /// </summary>
     /// <param name="id">The car ID.</param>
     /// <returns>A <see cref="Car"/>.</returns>
-    Task<Car> Get(Guid id);
+    Task<Car> Get(string id);
 
     /// <summary>
     /// Retrieves all the cars from the persistence layer.
     /// </summary>
     /// <returns>A collection of <see cref="Car"/>.</returns>
-    Task<IEnumerable<Car>> GetAll();
+    Task<List<Car>> GetAll();
 
     /// <summary>
     /// Updates existing car.
     /// </summary>
-    /// <param name="car"></param>
+    /// <param name="dto">Object holding information about the car.</param>
     /// <returns>An updated <see cref="Car"/>.</returns>
-    Task<Car> Update(Car car);
+    Task<Car> Update(UpdateCarDto dto);
 
     /// <summary>
     /// Removes a car from the persistence layer.
     /// </summary>
     /// <param name="id">The car ID.</param>
-    /// <returns>A deleted <see cref="Car"/>.</returns>
-    Task<Car> Delete(Guid id);
+    /// <returns>A task representing the asynchronous operation.</returns>
+    Task Delete(string id);
 }

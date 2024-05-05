@@ -3,7 +3,6 @@
 // </copyright>
 
 using System.Security.Claims;
-using System.Security.Principal;
 
 namespace CarRental.Infrastructure.Services.Interfaces;
 

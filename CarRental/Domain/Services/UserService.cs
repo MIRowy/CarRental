@@ -18,7 +18,7 @@ public class UserService(
     IPasswordHasherService passwordHasherService,
     IUserRepository userRepository) : IUserService
 {
-    public Task Add(CreateUserDto dto)
+    public Task Add(AddUserDto dto)
     {
         var hashedPassword = passwordHasherService.HashPassword(dto.Password);
         var user = new User(

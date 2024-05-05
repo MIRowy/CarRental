@@ -1,0 +1,25 @@
+﻿// <copyright file="CarFailureRepository.cs" company="Car Rental Inc">
+// Copyright (c) Car Rental Inc. All rights reserved.
+// </copyright>
+
+using CarRental.Database.Services.Interfaces;
+using CarRental.Domain.Models;
+using MongoDB.Driver;
+
+namespace CarRental.Database.Services;
+
+public class CarFailureRepository(IMongoDatabase database) : ICarFailureRepository
+{
+    private readonly IMongoCollection<CarFailure> collection = database.GetCollection<CarFailure>("CarFailures");
+
+    public Task Add(CarFailure carFailure) => this.collection.InsertOneAsync(carFailure);
+
+    public Task<CarFailure> Get(string id) => this.collection.Find(a => a.Id == id).FirstOrDefaultAsync();
+
+    public Task<List<CarFailure>> GetAll() => this.collection.Find(_ => true).ToListAsync();
+
+    public Task<CarFailure> Update(string id, UpdateDefinition<CarFailure> updateDefinition) =>
+        this.collection.FindOneAndUpdateAsync(a => a.Id == id, updateDefinition);
+
+    public Task Delete(string id) => this.collection.DeleteOneAsync(a => a.Id == id);
+}

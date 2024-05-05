@@ -16,7 +16,7 @@ namespace CarRental.Controllers;
 public class UserController(IUserService userService) : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> CreateUser([Required, FromBody] CreateUserDto dto)
+    public async Task<IActionResult> CreateUser([Required, FromBody] AddUserDto dto)
     {
         await userService.Add(dto);
 

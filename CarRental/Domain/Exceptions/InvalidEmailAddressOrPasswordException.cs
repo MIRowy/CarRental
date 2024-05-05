@@ -6,8 +6,7 @@ using CarRental.Infrastructure.Exceptions;
 
 namespace CarRental.Domain.Exceptions;
 
-public class InvalidEmailAddressOrPasswordException()
-    : ServiceException(
-        "Bad Request",
-        "Invalid email address or password was provided.",
-        StatusCodes.Status400BadRequest);
+public class InvalidEmailAddressOrPasswordException() : ServiceException(
+    "Bad Request",
+    "Invalid email address or password was provided.",
+    StatusCodes.Status400BadRequest);

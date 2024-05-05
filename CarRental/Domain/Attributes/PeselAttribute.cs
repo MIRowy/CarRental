@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 namespace CarRental.Domain.Attributes;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.Field)]
-public partial class PeselAttribute : ValidationAttribute
+public partial class PeselAttribute() : ValidationAttribute("Provided PESEL number is invalid.")
 {
     public override bool IsValid(object? value)
     {

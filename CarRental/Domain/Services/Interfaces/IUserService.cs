@@ -18,7 +18,7 @@ public interface IUserService
     /// </summary>
     /// <param name="dto">The dto from the infrastructure layer.</param>
     /// <returns>An awaitable <see cref="Task"/>.</returns>
-    Task Add(CreateUserDto dto);
+    Task Add(AddUserDto dto);
 
     /// <summary>
     /// Gets user from the persistence layer by his email address.

@@ -1,4 +1,4 @@
-﻿// <copyright file="CreateUserDto.cs" company="Car Rental Inc">
+﻿// <copyright file="AddUserDto.cs" company="Car Rental Inc">
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
@@ -8,7 +8,7 @@ using CarRental.Domain.Attributes;
 
 namespace CarRental.Domain.Dto;
 
-public record CreateUserDto(
+public record AddUserDto(
     [Required]
     [EmailAddress]
     string EmailAddress,

@@ -2,18 +2,18 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
-using System.Security.Cryptography;
+using System.Text.Json.Serialization;
 using CarRental.Domain.Extensions;
-using CarRental.Infrastructure.Extensions;
 using CarRental.Infrastructure.Middlewares;
-using CarRental.Infrastructure.Services;
-using CarRental.Infrastructure.Services.Interfaces;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -46,14 +46,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-var rsaKey = RSA.Create();
-var key = new RsaSecurityKey(rsaKey);
-
-builder.Services.AddSingleton<IJwtService>(new JwtService(key));
-
-builder.AddCarRentalAuth(key);
-builder.AddMongoDb();
-
 builder.AddInfrastructureLayer();
 builder.AddPersistenceLayer();
 builder.AddBusinessLayer();
@@ -73,5 +65,6 @@ app.MapControllers();
 app.UseHttpsRedirection();
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+app.UseMiddleware<AccountHelperMiddleware>();
 
 app.Run();

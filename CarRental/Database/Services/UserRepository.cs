@@ -27,8 +27,8 @@ public class UserRepository : IUserRepository
     public Task<List<User>> GetAll() =>
         this.collection.Find(_ => true).ToListAsync();
 
-    public Task<User> Update(string emailAddress, User user) =>
-        this.collection.FindOneAndReplaceAsync(a => a.EmailAddress == emailAddress, user);
+    public Task<User> Update(string emailAddress, UpdateDefinition<User> updateDefinition) =>
+        this.collection.FindOneAndUpdateAsync(a => a.EmailAddress == emailAddress, updateDefinition);
 
     public Task Delete(string emailAddress) =>
         this.collection.DeleteOneAsync(a => a.EmailAddress == emailAddress);

@@ -3,6 +3,7 @@
 // </copyright>
 
 using CarRental.Domain.Models;
+using MongoDB.Driver;
 
 namespace CarRental.Database.Services.Interfaces;
 
@@ -35,9 +36,9 @@ public interface IUserRepository
     /// Updates user by his email address.
     /// </summary>
     /// <param name="emailAddress">The email address.</param>
-    /// <param name="user">The user.</param>
+    /// <param name="updateDefinition">The user.</param>
     /// <returns>Updated user.</returns>
-    Task<User> Update(string emailAddress, User user);
+    Task<User> Update(string emailAddress, UpdateDefinition<User> updateDefinition);
 
     /// <summary>
     /// Removes user from database by email address.
