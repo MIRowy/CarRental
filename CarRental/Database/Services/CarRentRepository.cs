@@ -10,17 +10,19 @@ namespace CarRental.Database.Services;
 
 public class CarRentRepository(IMongoDatabase database) : ICarRentRepository
 {
-    private readonly IMongoCollection<CarRent> collection = database.GetCollection<CarRent>("CarRents");
+    private readonly IMongoCollection<CarRent> _collection = database.GetCollection<CarRent>("CarRents");
 
-    public Task Add(CarRent carRent) => this.collection.InsertOneAsync(carRent);
+    public Task Add(CarRent carRent) => _collection.InsertOneAsync(carRent);
+
+    public Task<CarRent> Get(string id) => _collection.Find(a => a.Id == id).FirstOrDefaultAsync();
 
     public Task<CarRent> Get(string userId, string id) =>
-        this.collection.Find(a => a.Id == id && a.CarReservation.UserId == userId).FirstOrDefaultAsync();
+        _collection.Find(a => a.Id == id && a.CarReservation.UserId == userId).FirstOrDefaultAsync();
 
-    public Task<List<CarRent>> GetAll() => this.collection.Find(_ => true).ToListAsync();
+    public Task<List<CarRent>> GetAll() => _collection.Find(_ => true).ToListAsync();
 
     public Task<CarRent> Update(string id, UpdateDefinition<CarRent> updateDefinition) =>
-        this.collection.FindOneAndUpdateAsync(a => a.Id == id, updateDefinition);
+        _collection.FindOneAndUpdateAsync(a => a.Id == id, updateDefinition);
 
-    public Task Delete(string id) => this.collection.DeleteOneAsync(a => a.Id == id);
+    public Task Delete(string id) => _collection.DeleteOneAsync(a => a.Id == id);
 }

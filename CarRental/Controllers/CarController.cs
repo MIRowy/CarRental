@@ -21,7 +21,7 @@ public class CarController(ICarService carService) : ControllerBase
     {
         var addedCar = await carService.Add(dto);
 
-        return this.Ok(addedCar);
+        return Ok(addedCar);
     }
 
     [HttpGet("{id}")]
@@ -30,7 +30,7 @@ public class CarController(ICarService carService) : ControllerBase
     {
         var car = await carService.Get(id);
 
-        return this.Ok(car);
+        return Ok(car);
     }
 
     [HttpGet("all")]
@@ -39,7 +39,7 @@ public class CarController(ICarService carService) : ControllerBase
     {
         var cars = await carService.GetAll();
 
-        return this.Ok(cars);
+        return Ok(cars);
     }
 
     [HttpPatch]
@@ -48,7 +48,7 @@ public class CarController(ICarService carService) : ControllerBase
     {
         var updatedCar = await carService.Update(dto);
 
-        return this.Ok(updatedCar);
+        return Ok(updatedCar);
     }
 
     [HttpDelete("{id}")]
@@ -57,6 +57,6 @@ public class CarController(ICarService carService) : ControllerBase
     {
         await carService.Delete(id);
 
-        return this.NoContent();
+        return NoContent();
     }
 }

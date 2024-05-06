@@ -20,19 +20,19 @@ public class UserController(IUserService userService) : ControllerBase
     {
         await userService.Add(dto);
 
-        return this.Created();
+        return Created();
     }
 
     [HttpGet]
     [Authorize(nameof(ApplicationRoles.User))]
     public async Task<IActionResult> GetUser()
     {
-        var emailAddress = this.HttpContext.User.FindFirst(a => a.Type == "email");
+        var emailAddress = HttpContext.User.FindFirst(a => a.Type == "email");
 
         // Authorization framework ensures that email is always provided.
         var user = await userService.Get(emailAddress!.Value);
 
-        return this.Ok(user);
+        return Ok(user);
     }
 
     [HttpGet("{emailAddress}")]
@@ -41,7 +41,7 @@ public class UserController(IUserService userService) : ControllerBase
     {
         var user = await userService.Get(emailAddress);
 
-        return this.Ok(user);
+        return Ok(user);
     }
 
     [HttpGet("all")]
@@ -50,7 +50,7 @@ public class UserController(IUserService userService) : ControllerBase
     {
         var users = await userService.GetAll();
 
-        return this.Ok(users);
+        return Ok(users);
     }
 
     [HttpPost]
@@ -59,6 +59,6 @@ public class UserController(IUserService userService) : ControllerBase
     {
         var token = await userService.GetJwt(dto);
 
-        return this.Ok(token.EncodedToken);
+        return Ok(token.EncodedToken);
     }
 }

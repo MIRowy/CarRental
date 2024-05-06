@@ -10,7 +10,7 @@ public record CarReservation(string UserId, Car Car, DateTime Start, DateTime En
 {
     [BsonId]
     [BsonElement("_id")]
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public string Id { get; init; } = Guid.NewGuid().ToString();
 
     // TODO: Implement this
     public int GetTotalPrice()

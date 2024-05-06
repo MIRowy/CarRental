@@ -23,6 +23,13 @@ public interface ICarReservationRepository
     /// Retrieves a reservation by its unique identifier.
     /// </summary>
     /// <param name="id">The unique identifier of the reservation.</param>
+    /// <returns>A task representing the asynchronous operation. The reservation corresponding to the provided ID.</returns>
+    Task<CarReservation> Get(string id);
+
+    /// <summary>
+    /// Retrieves a reservation by its unique identifier.
+    /// </summary>
+    /// <param name="id">The unique identifier of the reservation.</param>
     /// <param name="userId">The user ID.</param>
     /// <returns>A task representing the asynchronous operation. The reservation corresponding to the provided ID.</returns>
     Task<CarReservation> Get(string id, string userId);

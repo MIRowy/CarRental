@@ -22,6 +22,13 @@ public interface ICarRentRepository
     /// <summary>
     /// Retrieves a rental by its unique identifier.
     /// </summary>
+    /// <param name="id">The unique identifier of the rental.</param>
+    /// <returns>A task representing the asynchronous operation. The rental corresponding to the provided ID.</returns>
+    Task<CarRent> Get(string id);
+
+    /// <summary>
+    /// Retrieves a rental by its unique identifier.
+    /// </summary>
     /// <param name="userId">The user ID.</param>
     /// <param name="id">The unique identifier of the rental.</param>
     /// <returns>A task representing the asynchronous operation. The rental corresponding to the provided ID.</returns>

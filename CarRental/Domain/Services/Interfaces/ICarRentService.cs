@@ -29,10 +29,9 @@ public interface ICarRentService
     /// <summary>
     /// Adds a new car rent transaction.
     /// </summary>
-    /// <param name="userId">The user ID.</param>
     /// <param name="dto">The data transfer object containing information for adding a new car rent transaction.</param>
     /// <returns>A task representing the asynchronous operation. The added car rent transaction.</returns>
-    Task<CarRent> Add(string userId, AddCarRentDto dto);
+    Task<CarRent> Add(AddCarRentDto dto);
 
     /// <summary>
     /// Creates a new car failure record.
@@ -45,8 +44,7 @@ public interface ICarRentService
     /// <summary>
     /// Completes a car rent transaction.
     /// </summary>
-    /// <param name="userId">The user ID.</param>
     /// <param name="dto">The data transfer object containing information for completing a car rent transaction.</param>
     /// <returns>A task representing the asynchronous operation. The completed car rent transaction.</returns>
-    Task<CarReturn> CompleteRent(string userId, CompleteCarRentDto dto);
+    Task<CarReturn> CompleteRent(CompleteCarRentDto dto);
 }

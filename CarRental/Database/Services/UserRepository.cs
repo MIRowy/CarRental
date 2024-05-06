@@ -10,28 +10,28 @@ namespace CarRental.Database.Services;
 
 public class UserRepository : IUserRepository
 {
-    private readonly IMongoCollection<User> collection;
+    private readonly IMongoCollection<User> _collection;
 
     public UserRepository(IMongoDatabase database)
     {
-        this.collection = database.GetCollection<User>("Users");
+        _collection = database.GetCollection<User>("Users");
 
-        this.SetupIndexes();
+        SetupIndexes();
     }
 
-    public Task Add(User user) => this.collection.InsertOneAsync(user);
+    public Task Add(User user) => _collection.InsertOneAsync(user);
 
     public Task<User> Get(string emailAddress) =>
-        this.collection.Find(user => user.EmailAddress == emailAddress).FirstOrDefaultAsync();
+        _collection.Find(user => user.EmailAddress == emailAddress).FirstOrDefaultAsync();
 
     public Task<List<User>> GetAll() =>
-        this.collection.Find(_ => true).ToListAsync();
+        _collection.Find(_ => true).ToListAsync();
 
     public Task<User> Update(string emailAddress, UpdateDefinition<User> updateDefinition) =>
-        this.collection.FindOneAndUpdateAsync(a => a.EmailAddress == emailAddress, updateDefinition);
+        _collection.FindOneAndUpdateAsync(a => a.EmailAddress == emailAddress, updateDefinition);
 
     public Task Delete(string emailAddress) =>
-        this.collection.DeleteOneAsync(a => a.EmailAddress == emailAddress);
+        _collection.DeleteOneAsync(a => a.EmailAddress == emailAddress);
 
     private void SetupIndexes()
     {
@@ -39,6 +39,6 @@ public class UserRepository : IUserRepository
         var indexOptions = new CreateIndexOptions { Unique = true };
         var indexModel = new CreateIndexModel<User>(indexKeysDefinition, indexOptions);
 
-        this.collection.Indexes.CreateOne(indexModel);
+        _collection.Indexes.CreateOne(indexModel);
     }
 }

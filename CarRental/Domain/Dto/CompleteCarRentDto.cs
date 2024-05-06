@@ -1,4 +1,4 @@
-﻿// <copyright file="CompleteRentDto.cs" company="Car Rental Inc">
+﻿// <copyright file="CompleteCarRentDto.cs" company="Car Rental Inc">
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 

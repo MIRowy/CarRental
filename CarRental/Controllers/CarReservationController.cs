@@ -24,7 +24,7 @@ public class CarReservationController(
     {
         var addedCarReservation = await carReservationService.Add(accountHelper.EmailAddress, dto);
 
-        return this.Ok(addedCarReservation);
+        return Ok(addedCarReservation);
     }
 
     [HttpGet("{id}")]
@@ -33,7 +33,7 @@ public class CarReservationController(
     {
         var carReservation = await carReservationService.Get(accountHelper.EmailAddress, id);
 
-        return this.Ok(carReservation);
+        return Ok(carReservation);
     }
 
     [HttpGet("all")]
@@ -42,7 +42,7 @@ public class CarReservationController(
     {
         var carReservations = await carReservationService.GetAll();
 
-        return this.Ok(carReservations);
+        return Ok(carReservations);
     }
 
     [HttpGet("model/{id}")]
@@ -54,7 +54,7 @@ public class CarReservationController(
     {
         var dtos = await carReservationService.GetForCarModelIdBetweenDates(id, start, end);
 
-        return this.Ok(dtos);
+        return Ok(dtos);
     }
 
     [HttpPatch]
@@ -63,7 +63,7 @@ public class CarReservationController(
     {
         var updatedCarReservation = await carReservationService.Update(accountHelper.EmailAddress, dto);
 
-        return this.Ok(updatedCarReservation);
+        return Ok(updatedCarReservation);
     }
 
     [HttpDelete("{id}")]
@@ -72,6 +72,6 @@ public class CarReservationController(
     {
         await carReservationService.Delete(id);
 
-        return this.NoContent();
+        return NoContent();
     }
 }

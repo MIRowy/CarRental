@@ -20,29 +20,29 @@ public class CarRentController(
 {
     [HttpPost]
     [Authorize(nameof(ApplicationRoles.Employee))]
-    public async Task<IActionResult> AddCar([Required, FromBody] AddCarRentDto dto)
+    public async Task<IActionResult> AddCarRent([Required, FromBody] AddCarRentDto dto)
     {
-        var addedCar = await carRentService.Add(accountHelper.EmailAddress, dto);
+        var addedCar = await carRentService.Add(dto);
 
-        return this.Ok(addedCar);
+        return Ok(addedCar);
     }
 
     [HttpGet("{id}")]
     [Authorize(nameof(ApplicationRoles.User))]
-    public async Task<IActionResult> GetCar([Required, FromRoute] string id)
+    public async Task<IActionResult> GetCarRent([Required, FromRoute] string id)
     {
         var car = await carRentService.Get(accountHelper.EmailAddress, id);
 
-        return this.Ok(car);
+        return Ok(car);
     }
 
     [HttpGet("all")]
     [Authorize(nameof(ApplicationRoles.User))]
-    public async Task<IActionResult> GetAllCars()
+    public async Task<IActionResult> GetAllCarRents()
     {
         var cars = await carRentService.GetAll();
 
-        return this.Ok(cars);
+        return Ok(cars);
     }
 
     [HttpPost("failure")]
@@ -51,15 +51,15 @@ public class CarRentController(
     {
         var carFailure = await carRentService.CreateFailure(accountHelper.EmailAddress, dto);
 
-        return this.Ok(carFailure);
+        return Ok(carFailure);
     }
 
     [HttpPost("complete")]
     [Authorize(nameof(ApplicationRoles.Employee))]
     public async Task<IActionResult> CompleteCarRent(CompleteCarRentDto dto)
     {
-        var carReturn = await carRentService.CompleteRent(accountHelper.EmailAddress, dto);
+        var carReturn = await carRentService.CompleteRent(dto);
 
-        return this.Ok(carReturn);
+        return Ok(carReturn);
     }
 }

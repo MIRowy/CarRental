@@ -1,4 +1,4 @@
-﻿// <copyright file="IFailureRepository.cs" company="Car Rental Inc">
+﻿// <copyright file="ICarFailureRepository.cs" company="Car Rental Inc">
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 

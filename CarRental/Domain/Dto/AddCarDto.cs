@@ -13,4 +13,6 @@ public record AddCarDto(
     string Description,
     [Required]
     int OdoMeter,
+    [Required]
+    int PricePerDay,
     IEnumerable<byte[]>? Images = null);

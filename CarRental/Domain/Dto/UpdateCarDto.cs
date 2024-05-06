@@ -9,10 +9,8 @@ namespace CarRental.Domain.Dto;
 public record UpdateCarDto(
     [Required]
     string Id,
-    [Required]
-    string CarModelId,
-    [Required]
-    string Description,
-    [Required]
-    int Odometer,
+    string? CarModelId = null,
+    string? Description = null,
+    int? Odometer = null,
+    int? PricePerDay = null,
     IEnumerable<byte[]>? Images = null);

@@ -2,11 +2,14 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using CarRental.Database.Services.Interfaces;
 using CarRental.Domain.Dto;
+using CarRental.Domain.Enums;
 using CarRental.Domain.Exceptions;
 using CarRental.Domain.Models;
 using CarRental.Domain.Services.Interfaces;
+using MongoDB.Driver;
 
 namespace CarRental.Domain.Services;
 
@@ -17,13 +20,15 @@ public class CarRentService(
     ICarReturnRepository carReturnRepository)
     : ICarRentService
 {
+    [ExcludeFromCodeCoverage(Justification = "Simple method passthrough, no need to test.")]
     public Task<CarRent> Get(string userId, string id) => carRentRepository.Get(userId, id);
 
+    [ExcludeFromCodeCoverage(Justification = "Simple method passthrough, no need to test.")]
     public Task<List<CarRent>> GetAll() => carRentRepository.GetAll();
 
-    public async Task<CarRent> Add(string userId, AddCarRentDto dto)
+    public async Task<CarRent> Add(AddCarRentDto dto)
     {
-        var carReservation = await carReservationRepository.Get(userId, dto.CarReservationId);
+        var carReservation = await carReservationRepository.Get(dto.CarReservationId);
 
         if (carReservation == null)
         {
@@ -55,14 +60,20 @@ public class CarRentService(
         return carFailure;
     }
 
-    public async Task<CarReturn> CompleteRent(string userId, CompleteCarRentDto dto)
+    public async Task<CarReturn> CompleteRent(CompleteCarRentDto dto)
     {
-        var carRent = await carRentRepository.Get(userId, dto.CarRentId);
+        var carRent = await carRentRepository.Get(dto.CarRentId);
 
         if (carRent == null)
         {
             throw new CarRentNotFoundException();
         }
+
+        var carRentUpdateDefinitionBuilder = new UpdateDefinitionBuilder<CarRent>();
+
+        carRentUpdateDefinitionBuilder.Set(a => a.Status, RentStatuses.Completed);
+
+        carRent = await carRentRepository.Update(carRent.Id, carRentUpdateDefinitionBuilder.Combine());
 
         var carReturn = new CarReturn(carRent, dto.Date, dto.IsCleaningNeeded, dto.IsFuelingNeeded);
 

@@ -8,10 +8,10 @@ namespace CarRental.Domain.Dto;
 
 public record UpdateCarReservationDto(
     [Required]
-    string CarReservationId,
+    string Id,
     [Required]
     string CarId,
     [Required]
-    DateTime StartDate,
+    DateTime Start,
     [Required]
-    DateTime EndDate);
+    DateTime End);

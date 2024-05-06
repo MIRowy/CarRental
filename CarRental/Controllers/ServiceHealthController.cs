@@ -16,20 +16,20 @@ public class ServiceHealthController(IAccountHelper accountHelper) : ControllerB
     [HttpGet]
     public IActionResult Get()
     {
-        return this.Ok("I'm alive!");
+        return Ok("I'm alive!");
     }
 
     [HttpGet("/employee")]
     [Authorize(nameof(ApplicationRoles.Employee))]
     public IActionResult TestAuthorizeEmployee()
     {
-        return this.Ok($"Yes, you are a brave employee ({accountHelper.EmailAddress}). Good day to you!");
+        return Ok($"Yes, you are a brave employee ({accountHelper.EmailAddress}). Good day to you!");
     }
 
     [HttpGet("/signedUser")]
     [Authorize(nameof(ApplicationRoles.User))]
     public IActionResult TestAuthorizeSignedUser()
     {
-        return this.Ok("Yes, you are a logged user. Congrats!");
+        return Ok("Yes, you are a logged user. Congrats!");
     }
 }

@@ -10,16 +10,16 @@ namespace CarRental.Database.Services;
 
 public class CarRepository(IMongoDatabase database) : ICarRepository
 {
-    private readonly IMongoCollection<Car> collection = database.GetCollection<Car>("Cars");
+    private readonly IMongoCollection<Car> _collection = database.GetCollection<Car>("Cars");
 
-    public Task Add(Car car) => this.collection.InsertOneAsync(car);
+    public Task Add(Car car) => _collection.InsertOneAsync(car);
 
-    public Task<Car> Get(string id) => this.collection.Find(a => a.Id == id).FirstOrDefaultAsync();
+    public Task<Car> Get(string id) => _collection.Find(a => a.Id == id).FirstOrDefaultAsync();
 
-    public Task<List<Car>> GetAll() => this.collection.Find(_ => true).ToListAsync();
+    public Task<List<Car>> GetAll() => _collection.Find(_ => true).ToListAsync();
 
     public Task<Car> Update(string id, UpdateDefinition<Car> updateDefinition) =>
-        this.collection.FindOneAndUpdateAsync(a => a.Id == id, updateDefinition);
+        _collection.FindOneAndUpdateAsync(a => a.Id == id, updateDefinition);
 
-    public Task Delete(string id) => this.collection.DeleteOneAsync(a => a.Id == id);
+    public Task Delete(string id) => _collection.DeleteOneAsync(a => a.Id == id);
 }

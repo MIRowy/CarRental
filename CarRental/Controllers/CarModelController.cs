@@ -21,7 +21,7 @@ public class CarModelController(ICarModelService carModelService) : ControllerBa
     {
         var addedCarModel = await carModelService.Add(dto);
 
-        return this.Ok(addedCarModel);
+        return Ok(addedCarModel);
     }
 
     [HttpGet("{id}")]
@@ -30,7 +30,7 @@ public class CarModelController(ICarModelService carModelService) : ControllerBa
     {
         var carModel = await carModelService.Get(id);
 
-        return this.Ok(carModel);
+        return Ok(carModel);
     }
 
     [HttpGet("all")]
@@ -39,7 +39,7 @@ public class CarModelController(ICarModelService carModelService) : ControllerBa
     {
         var carModels = await carModelService.GetAll();
 
-        return this.Ok(carModels);
+        return Ok(carModels);
     }
 
     [HttpPatch]
@@ -48,7 +48,7 @@ public class CarModelController(ICarModelService carModelService) : ControllerBa
     {
         var updatedCarModel = await carModelService.Update(dto);
 
-        return this.Ok(updatedCarModel);
+        return Ok(updatedCarModel);
     }
 
     [HttpDelete("{id}")]
@@ -57,6 +57,6 @@ public class CarModelController(ICarModelService carModelService) : ControllerBa
     {
         await carModelService.Delete(id);
 
-        return this.NoContent();
+        return NoContent();
     }
 }

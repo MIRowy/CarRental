@@ -1,4 +1,4 @@
-﻿// <copyright file="ServiceExceptionBase.cs" company="Car Rental Inc">
+﻿// <copyright file="ServiceException.cs" company="Car Rental Inc">
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 

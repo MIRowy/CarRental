@@ -2,6 +2,7 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using CarRental.Database.Services.Interfaces;
 using CarRental.Domain.Dto;
 using CarRental.Domain.Exceptions;
@@ -46,8 +47,10 @@ public class CarReservationService(
         return carReservation;
     }
 
+    [ExcludeFromCodeCoverage(Justification = "Simple method passthrough, no need to test.")]
     public Task<CarReservation> Get(string userId, string id) => carReservationRepository.Get(id, userId);
 
+    [ExcludeFromCodeCoverage(Justification = "Simple method passthrough, no need to test.")]
     public Task<List<CarReservation>> GetAll() => carReservationRepository.GetAll();
 
     public async Task<List<GetCarReservationsDto>> GetForCarModelIdBetweenDates(
@@ -66,7 +69,7 @@ public class CarReservationService(
 
     public async Task<CarReservation> Update(string userId, UpdateCarReservationDto dto)
     {
-        var carReservation = await carReservationRepository.Get(userId, dto.CarReservationId);
+        var carReservation = await carReservationRepository.Get(userId, dto.Id);
 
         if (carReservation == null)
         {
@@ -81,7 +84,7 @@ public class CarReservationService(
         }
 
         var isCarAvailable = await carReservationRepository
-            .IsCarAvailableForReservation(dto.CarId, dto.StartDate, dto.EndDate);
+            .IsCarAvailableForReservation(dto.CarId, dto.Start, dto.End);
 
         if (!isCarAvailable)
         {
@@ -92,7 +95,7 @@ public class CarReservationService(
 
         updateDefinition.Set(a => a.Car, car);
 
-        var updatedCarReservation = await carReservationRepository.Update(dto.CarReservationId, updateDefinition);
+        var updatedCarReservation = await carReservationRepository.Update(dto.Id, updateDefinition);
 
         return updatedCarReservation;
     }

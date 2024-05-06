@@ -22,9 +22,10 @@ public interface ICarReturnRepository
     /// <summary>
     /// Retrieves a car return record by its unique identifier.
     /// </summary>
+    /// <param name="userId">The user ID.</param>
     /// <param name="id">The unique identifier of the car return record.</param>
     /// <returns>A task representing the asynchronous operation. The car return record corresponding to the provided ID.</returns>
-    Task<CarReturn> Get(string id);
+    Task<CarReturn> Get(string userId, string id);
 
     /// <summary>
     /// Retrieves all car return records from the repository.

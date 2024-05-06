@@ -10,7 +10,7 @@ public record CarReturn(CarRent CarRent, DateTime Date, bool IsCleaningNeeded, b
 {
     [BsonId]
     [BsonElement("_id")]
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public string Id { get; init; } = Guid.NewGuid().ToString();
 
     // TODO: Implement the below.
     public int GetTotalPrice()

@@ -2,6 +2,7 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using CarRental.Database.Services.Interfaces;
 using CarRental.Domain.Dto;
 using CarRental.Domain.Models;
@@ -27,8 +28,10 @@ public class CarModelService(ICarModelRepository carModelRepository) : ICarModel
         return carModel;
     }
 
+    [ExcludeFromCodeCoverage(Justification = "Simple method passthrough, no need to test.")]
     public Task<CarModel> Get(string id) => carModelRepository.Get(id);
 
+    [ExcludeFromCodeCoverage(Justification = "Simple method passthrough, no need to test.")]
     public Task<List<CarModel>> GetAll() => carModelRepository.GetAll();
 
     public Task<CarModel> Update(UpdateCarModelDto dto)
@@ -38,5 +41,6 @@ public class CarModelService(ICarModelRepository carModelRepository) : ICarModel
         return carModelRepository.Update(dto.Id, updateDefinition);
     }
 
+    [ExcludeFromCodeCoverage(Justification = "Simple method passthrough, no need to test.")]
     public Task Delete(string id) => carModelRepository.Delete(id);
 }

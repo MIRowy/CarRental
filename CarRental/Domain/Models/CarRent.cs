@@ -11,7 +11,7 @@ public record CarRent(CarReservation CarReservation)
 {
     [BsonId]
     [BsonElement("_id")]
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public string Id { get; init; } = Guid.NewGuid().ToString();
 
-    public RentStatuses Status { get; } = RentStatuses.Ongoing;
+    public RentStatuses Status { get; init; } = RentStatuses.Ongoing;
 }

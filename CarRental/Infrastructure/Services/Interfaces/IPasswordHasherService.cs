@@ -12,7 +12,7 @@ namespace CarRental.Infrastructure.Services.Interfaces;
 public interface IPasswordHasherService
 {
     /// <summary>
-    /// Hashes password using internal <see cref="PasswordHasher{TUser}"/>
+    /// Hashes password using internal <see cref="PasswordHasher{TUser}"/>.
     /// </summary>
     /// <param name="password">The password.</param>
     /// <returns>Hashed password.</returns>

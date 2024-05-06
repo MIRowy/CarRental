@@ -18,11 +18,11 @@ public class GlobalExceptionHandlingMiddleware(RequestDelegate next, ILogger<Glo
         }
         catch (ServiceException ex)
         {
-            await this.HandleServiceException(ex, context);
+            await HandleServiceException(ex, context);
         }
         catch (Exception ex)
         {
-            await this.HandleException(ex, context);
+            await HandleException(ex, context);
         }
     }
 
