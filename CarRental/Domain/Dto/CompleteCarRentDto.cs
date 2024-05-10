@@ -13,5 +13,4 @@ public record CompleteCarRentDto(
     DateTime Date,
     [Required]
     bool IsCleaningNeeded,
-    [Required]
-    bool IsFuelingNeeded);
+    int LackingGas = 0);

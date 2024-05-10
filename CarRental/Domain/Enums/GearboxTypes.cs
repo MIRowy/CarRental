@@ -6,8 +6,8 @@ namespace CarRental.Domain.Enums;
 
 public enum GearboxTypes
 {
-    // TODO: Add more types or remove the comment
     Manual,
     Automatic,
     SemiAutomatic,
+    SingleStage,
 }
