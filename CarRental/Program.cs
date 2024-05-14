@@ -18,7 +18,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "CarRentalAPI",
+        Title = "JWTToken_Auth_API",
         Version = "v1",
     });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
