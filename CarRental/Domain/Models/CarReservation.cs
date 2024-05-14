@@ -6,52 +6,27 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace CarRental.Domain.Models;
 
-public class CarReservation
+public record CarReservation(string UserId, Car Car, DateTime Start, DateTime End, bool IsDepositPaid)
 {
-    public CarReservation(string userId, Car car, DateTime start, DateTime end, bool isDepositPaid)
-    {
-        UserId = userId;
-        Car = car;
-        Start = start;
-        End = end;
-        IsDepositPaid = isDepositPaid;
-
-        this.TotalPrice = double.Round(this.GetTotalPrice(), 2);
-    }
-
     [BsonId]
     [BsonElement("_id")]
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public string Id { get; init; } = Guid.NewGuid().ToString();
 
-    public string UserId { get; init; }
-
-    public Car Car { get; init; }
-
-    public DateTime Start { get; init; }
-
-    public DateTime End { get; init; }
-
-    public bool IsDepositPaid { get; init; }
-
-    public double TotalPrice { get; init; }
-
-    private double GetTotalPrice()
+    // TODO: Implement this
+    public int GetTotalPrice()
     {
-        if (IsDepositPaid)
-        {
-            return (Car.PricePerDay * GetLengthInDays()) - GetDeposit();
-        }
-
-        return Car.PricePerDay * GetLengthInDays();
+        return 0;
     }
 
-    private int GetLengthInDays()
+    // TODO: Implement this
+    public int GetLengthInDays()
     {
-        return (End - Start).Days;
+        return 0;
     }
 
-    private double GetDeposit()
+    // TODO: Implement this
+    public int GetDeposit()
     {
-        return Car.PricePerDay * GetLengthInDays() * 0.25;
+        return 0;
     }
 }

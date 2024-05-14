@@ -10,7 +10,7 @@ namespace CarRental.Domain.Utils;
 
 public static class UpdateDefinitionBuilder
 {
-    public static UpdateDefinition<TModel>  Build<TDto, TModel>(TDto dto)
+    public static UpdateDefinition<TModel> Build<TDto, TModel>(TDto dto)
         where TDto : class
     {
         var update = Builders<TModel>.Update;

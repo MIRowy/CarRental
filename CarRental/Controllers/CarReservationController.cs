@@ -19,7 +19,7 @@ public class CarReservationController(
     IAccountHelper accountHelper) : ControllerBase
 {
     [HttpPost]
-    [Authorize(nameof(ApplicationRoles.User))]
+    [Authorize(nameof(ApplicationRoles.Employee))]
     public async Task<IActionResult> AddCarReservation([Required, FromBody] AddCarReservationDto dto)
     {
         var addedCarReservation = await carReservationService.Add(accountHelper.EmailAddress, dto);
@@ -58,7 +58,7 @@ public class CarReservationController(
     }
 
     [HttpPatch]
-    [Authorize(nameof(ApplicationRoles.User))]
+    [Authorize(nameof(ApplicationRoles.Employee))]
     public async Task<IActionResult> UpdateCarReservation([Required, FromBody] UpdateCarReservationDto dto)
     {
         var updatedCarReservation = await carReservationService.Update(accountHelper.EmailAddress, dto);
@@ -67,7 +67,7 @@ public class CarReservationController(
     }
 
     [HttpDelete("{id}")]
-    [Authorize(nameof(ApplicationRoles.User))]
+    [Authorize(nameof(ApplicationRoles.Employee))]
     public async Task<IActionResult> DeleteCarReservation(string id)
     {
         await carReservationService.Delete(id);
