@@ -54,6 +54,15 @@ public class CarRentController(
         return Ok(carFailure);
     }
 
+    [HttpPost("failure/accept")]
+    [Authorize(nameof(ApplicationRoles.Employee))]
+    public async Task<IActionResult> CompleteCarFailure(CompleteCarFailureDto dto)
+    {
+        var carFailure = await carRentService.CompleteCarFailure(dto);
+
+        return Ok(carFailure);
+    }
+
     [HttpPost("complete")]
     [Authorize(nameof(ApplicationRoles.Employee))]
     public async Task<IActionResult> CompleteCarRent(CompleteCarRentDto dto)

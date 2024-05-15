@@ -42,6 +42,13 @@ public interface ICarRentService
     Task<CarFailure> CreateFailure(string userId, CreateFailureDto dto);
 
     /// <summary>
+    /// Completes a car failure record.
+    /// </summary>
+    /// <param name="dto">The data transfer object containing information for creating a new car failure record.</param>
+    /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+    Task<CarFailure> CompleteCarFailure(CompleteCarFailureDto dto);
+
+    /// <summary>
     /// Completes a car rent transaction.
     /// </summary>
     /// <param name="dto">The data transfer object containing information for completing a car rent transaction.</param>

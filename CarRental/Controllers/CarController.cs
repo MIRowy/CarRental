@@ -25,7 +25,6 @@ public class CarController(ICarService carService) : ControllerBase
     }
 
     [HttpGet("{id}")]
-    [Authorize(nameof(ApplicationRoles.User))]
     public async Task<IActionResult> GetCar([Required, FromRoute] string id)
     {
         var car = await carService.Get(id);
@@ -34,7 +33,6 @@ public class CarController(ICarService carService) : ControllerBase
     }
 
     [HttpGet("all")]
-    [Authorize(nameof(ApplicationRoles.User))]
     public async Task<IActionResult> GetAllCars()
     {
         var cars = await carService.GetAll();
