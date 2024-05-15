@@ -2,6 +2,7 @@
 // Copyright (c) Car Rental Inc. All rights reserved.
 // </copyright>
 
+using AutoFixture;
 using CarRental.Database.Services.Interfaces;
 using CarRental.Domain.Dto;
 using CarRental.Domain.Enums;
@@ -40,7 +41,11 @@ public class CarRentServiceTests
         const string userId = nameof(userId);
         const string carReservationId = nameof(carReservationId);
 
-        var carReservation = new CarReservation(userId, null!, DateTime.Now, DateTime.Now, false)
+        var fixture = new Fixture();
+
+        var car = fixture.Create<Car>();
+
+        var carReservation = new CarReservation(userId, car, DateTime.Now, DateTime.Now, false)
         {
             Id = carReservationId,
         };
@@ -90,7 +95,11 @@ public class CarRentServiceTests
         const string carRentId = nameof(carRentId);
         const string description = nameof(description);
 
-        var carRent = new CarRent(new CarReservation(userId, null!, DateTime.Now, DateTime.Now, false))
+        var fixture = new Fixture();
+
+        var car = fixture.Create<Car>();
+
+        var carRent = new CarRent(new CarReservation(userId, car, DateTime.Now, DateTime.Now, false))
         {
             Id = carRentId,
         };
@@ -142,9 +151,13 @@ public class CarRentServiceTests
         const string carRentId = nameof(carRentId);
         var returnDate = DateTime.Now;
         const bool isCleaningNeeded = false;
-        const bool isFuelingNeeded = true;
+        const int lackingGas = 100;
 
-        var carRent = new CarRent(new CarReservation(userId, null!, DateTime.Now, DateTime.Now, false))
+        var fixture = new Fixture();
+
+        var car = fixture.Create<Car>();
+
+        var carRent = new CarRent(new CarReservation(userId, car, DateTime.Now, DateTime.Now, false))
         {
             Id = carRentId,
         };
@@ -152,10 +165,10 @@ public class CarRentServiceTests
         _mockCarRentRepository.Setup(a => a.Get(carRentId)).ReturnsAsync(carRent);
         _mockCarRentRepository
             .Setup(a => a.Update(carRentId, It.IsAny<UpdateDefinition<CarRent>>()))
-            .ReturnsAsync(carRent with { Status = RentStatuses.Completed });
+            .ReturnsAsync(carRent with { Status = CarRentStatuses.Completed });
 
         // Act
-        var dto = new CompleteCarRentDto(carRentId, returnDate, isCleaningNeeded, isFuelingNeeded);
+        var dto = new CompleteCarRentDto(carRentId, returnDate, isCleaningNeeded, lackingGas);
         var result = await _service.CompleteRent(dto);
 
         // Assert
@@ -168,8 +181,8 @@ public class CarRentServiceTests
             result.CarRent.CarReservation.UserId.Should().Be(userId);
             result.Date.Should().Be(returnDate);
             result.IsCleaningNeeded.Should().Be(isCleaningNeeded);
-            result.IsFuelingNeeded.Should().Be(isFuelingNeeded);
-            result.CarRent.Status.Should().Be(RentStatuses.Completed);
+            result.LackingGas.Should().Be(lackingGas);
+            result.CarRent.Status.Should().Be(CarRentStatuses.Completed);
         }
     }
 
@@ -180,12 +193,12 @@ public class CarRentServiceTests
         const string carRentId = nameof(carRentId);
         var returnDate = DateTime.Now;
         const bool isCleaningNeeded = false;
-        const bool isFuelingNeeded = true;
+        const int lackingGas = 100;
 
         _mockCarRentRepository.Setup(a => a.Get(carRentId)).ReturnsAsync((CarRent)null!);
 
         // Act
-        var dto = new CompleteCarRentDto(carRentId, returnDate, isCleaningNeeded, isFuelingNeeded);
+        var dto = new CompleteCarRentDto(carRentId, returnDate, isCleaningNeeded, lackingGas);
         var action = () => _service.CompleteRent(dto);
 
         // Assert

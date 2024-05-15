@@ -54,7 +54,7 @@ public class CarReservationServiceTests
         var dto = new AddCarReservationDto(carId, startDate, endDate, isDepositPaid);
         var result = await _service.Add(userId, dto);
 
-        carReservation = carReservation with { Id = result.Id };
+        carReservation.Id = result.Id;
 
         // Assert
         using (new AssertionScope())
@@ -171,7 +171,7 @@ public class CarReservationServiceTests
 
         var carReservation = fixture.Create<CarReservation>();
         var car = fixture.Create<Car>();
-        var updatedReservation = carReservation with { Car = car, Start = start, End = end };
+        var updatedReservation = new CarReservation(userId, car, start, end, carReservation.IsDepositPaid);
 
         _mockCarReservationRepository.Setup(a => a.Get(userId, id)).ReturnsAsync(carReservation);
         _mockCarRepository.Setup(a => a.Get(carId)).ReturnsAsync(car);

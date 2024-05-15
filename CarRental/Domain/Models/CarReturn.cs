@@ -6,21 +6,48 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace CarRental.Domain.Models;
 
-public record CarReturn(CarRent CarRent, DateTime Date, bool IsCleaningNeeded, bool IsFuelingNeeded)
+public record CarReturn
 {
+    public CarReturn(CarRent carRent, DateTime date, bool isCleaningNeeded, int lackingGas = 0)
+    {
+        this.CarRent = carRent;
+        this.Date = date;
+        this.IsCleaningNeeded = isCleaningNeeded;
+        this.LackingGas = lackingGas;
+
+        this.TotalPrice = double.Round(this.GetTotalPrice(), 2);
+    }
+
     [BsonId]
     [BsonElement("_id")]
     public string Id { get; init; } = Guid.NewGuid().ToString();
 
-    // TODO: Implement the below.
-    public int GetTotalPrice()
+    public CarRent CarRent { get; init; }
+
+    public DateTime Date { get; init; }
+
+    public bool IsCleaningNeeded { get; init; }
+
+    public int LackingGas { get; init; }
+
+    public double TotalPrice { get; init; }
+
+    private double GetTotalPrice()
     {
-        return 0;
+        var totalPrice = CarRent.CarReservation.TotalPrice + GetPriceForOvertime();
+
+        if (IsCleaningNeeded)
+        {
+            totalPrice += 150;
+        }
+
+        totalPrice += LackingGas * 5.19;
+
+        return totalPrice;
     }
 
-    // TODO: Implement the below.
-    private int GetPriceForOvertime()
+    private double GetPriceForOvertime()
     {
-        return 0;
+        return (Date - CarRent.CarReservation.End).Days * CarRent.CarReservation.Car.PricePerDay * 1.5;
     }
 }
